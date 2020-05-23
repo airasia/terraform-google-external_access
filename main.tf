@@ -13,9 +13,7 @@ locals {
       for role in roles : {
         group_email = group_email
         role        = role
-      }
-    ]
-  ])
+  }]])
 }
 
 resource "google_project_iam_member" "group_access" {

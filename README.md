@@ -13,7 +13,7 @@ module "group_access" {
     "admins@example.com" = [
       "roles/appengine.appAdmin",
       "roles/cloudsql.admin"
-    ]
+    ],
   }
 }
 ```
