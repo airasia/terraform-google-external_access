@@ -19,13 +19,13 @@ locals {
 }
 
 resource "google_project_iam_member" "group_access" {
-  count  = length(local.group_roles)
-  role   = local.group_roles[count.index].role
-  member = "group:${local.group_roles[count.index].group_email}"
+  for_each = { for obj in local.group_roles : "${obj.group_email}---${obj.role}" => obj }
+  role     = each.value.role
+  member   = "group:${each.value.group_email}"
 }
 
 resource "google_project_iam_member" "service_account_access" {
-  count  = length(local.sa_roles)
-  role   = local.sa_roles[count.index].role
-  member = "serviceAccount:${local.sa_roles[count.index].sa_email}"
+  for_each = { for obj in local.sa_roles : "${obj.sa_email}---${obj.role}" => obj }
+  role     = each.value.role
+  member   = "serviceAccount:${each.value.sa_email}"
 }
