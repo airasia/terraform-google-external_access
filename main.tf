@@ -19,13 +19,13 @@ locals {
 }
 
 resource "google_project_iam_member" "group_access" {
-  for_each = { for obj in local.group_roles : "${obj.group_email}---${obj.role}" => obj }
+  for_each = { for obj in local.group_roles : "${obj.group_email}---${obj.role}" => obj if obj.role != "roles/owner" }
   role     = each.value.role
   member   = "group:${each.value.group_email}"
 }
 
 resource "google_project_iam_member" "service_account_access" {
-  for_each = { for obj in local.sa_roles : "${obj.sa_email}---${obj.role}" => obj }
+  for_each = { for obj in local.sa_roles : "${obj.sa_email}---${obj.role}" => obj if obj.role != "roles/owner" }
   role     = each.value.role
   member   = "serviceAccount:${each.value.sa_email}"
 }
