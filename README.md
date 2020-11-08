@@ -18,8 +18,8 @@ module "external_access" {
     ],
   }
   sa_roles = {
-    # DO NOT use this variable to pass ServiceAccount emails owned by the same project where the modue is being used.
-    # See attetion live above.
+    # DO NOT use this variable to pass ServiceAccount emails owned by the same project where this module is being used.
+    # See attention line above.
     "app-deployer@example-project.iam.gserviceaccount.com" = [
       "roles/storage.objectViewer",
       "roles/appengine.deployer",
